@@ -57,7 +57,7 @@ def createLogList():
     logList.append("1.1.0 (2/12/20): Added GUI for copying programs(and appropriate error prompt). Copying mechanism added.")
     logList.append("1.0.9 (2/12/20): Added quit button and title text.")
     logList.append("1.0.5 (2/12/20): Prompt for directories now saves input. Doesn't let user exit settings if directories are incorrect.")
-    logList.append("1.0.3 (2/10/20): Change Log user-interfa ce added")
+    logList.append("1.0.3 (2/10/20): Change Log user-interface added")
     logList.append("1.0.2 (2/9/20): Main menu added & Settings button added. Settings currently has prompts for both directories.")
     logList.append("1.0.0 (2/9/20): Fully functioning back-end released. Added change log.")
 
@@ -611,12 +611,14 @@ def mainMenu(): #Main menu
             x+=150
             
             fileName=file.replace(sourceDirectory+"/","")
-            with open ("InstaCopyFiles.txt") as fileList:
-                if file in fileList.read(): #File has already been copied before
-                    tk.Label(frame,text=fileName,fg="red").grid(row=row2,column=column,padx=20)
-                else:
-                    tk.Label(frame,text=fileName).grid(row=row2,column=column,padx=20)
-
+            try:
+                with open ("InstaCopyFiles.txt") as fileList:
+                    if file in fileList.read(): #File has already been copied before
+                        tk.Label(frame,text=fileName,fg="red").grid(row=row2,column=column,padx=20)
+                    else:
+                        tk.Label(frame,text=fileName).grid(row=row2,column=column,padx=20)
+            except:
+                tk.Label(frame,text=fileName).grid(row=row2,column=column,padx=20)
             if file[-3:]=="CR2":
                 #print (True)
                 path=os.getcwd()
