@@ -611,15 +611,17 @@ def mainMenu(): #Main menu
             x+=150
             
             fileName=file.replace(sourceDirectory+"/","")
+            oldFile = False
             try:
                 with open ("InstaCopyFiles.txt") as fileList:
                     if file in fileList.read(): #File has already been copied before
                         tk.Label(frame,text=fileName,fg="red").grid(row=row2,column=column,padx=20)
+                        oldFile = True
                     else:
                         tk.Label(frame,text=fileName).grid(row=row2,column=column,padx=20)
             except:
                 tk.Label(frame,text=fileName).grid(row=row2,column=column,padx=20)
-            if file[-3:]=="CR2":
+            if file[-3:]=="CR2" or oldFile:
                 #print (True)
                 path=os.getcwd()
                 blankFile=path+"\BlankFile.png"
